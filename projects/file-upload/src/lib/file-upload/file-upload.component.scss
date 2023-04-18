@@ -1,0 +1,63 @@
+.file-item {
+    background-color: white;
+    padding: 1em;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &__left-side {
+        display: flex;
+    }
+    &__data {
+        margin-left: 1em;
+        text-align: left;
+    }
+    &__name {
+        font-weight: 500;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        :hover {
+            color: red;
+        }
+    }
+    &__size {
+        font-weight: 500;
+        color: #9b9b9b;
+        font-size: 11px;
+    }
+    &__remove {
+        color: #f2994a;
+        font-weight: 500;
+    }
+    &__show {
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: #0d6efd;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.disabled {
+    cursor: not-allowed;
+    color: grey;
+    svg {
+        fill: grey;
+        path {
+            fill: grey;
+        }
+    }
+}
+
+.error-message {
+    margin: 5px 0 0 0;
+    font-size: 11px;
+    color: red;
+    font-weight: 600;
+}
+
+input {
+    display: none;
+}

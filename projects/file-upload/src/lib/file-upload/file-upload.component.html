@@ -1,0 +1,57 @@
+<!-- input de seleção única -->
+<div *ngIf="!multiple" class="file-container {{class}}">
+  <div (click)="input.click()" class="file-item__left-side" [class.disabled]="disabled">
+    <div>
+      <svg width="32" height="36" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20.9712 0.111328H3.00565C2.37298 0.128076 1.77249 0.393813 1.33465 0.850796C0.896807 1.30778 0.656991 1.91909 0.667312 2.55188V33.4486C0.656991 34.0814 0.896807 34.6927 1.33465 35.1496C1.77249 35.6066 2.37298 35.8724 3.00565 35.8891H28.9956C29.6283 35.8724 30.2288 35.6066 30.6666 35.1496C31.1045 34.6927 31.3443 34.0814 31.334 33.4486V10.2313L20.9712 0.111328ZM19.834 11.6113V2.46244L29.1618 11.6113H19.834Z"
+          fill="#505151" />
+      </svg>
+    </div>
+    <div class="file-item__data">
+      <div *ngIf="!disabled" pTooltip="Anexar" class="file-item__name">{{fileName}}</div>
+      <div *ngIf="disabled" class="file-item__name">{{fileName}}</div>
+      <div *ngIf="selectedFileName" class="file-item__size">{{selectedFileName}}</div>
+      <div class="file-item__size">{{getFileSize() > 0 ? getFileSize() + ' MB' : 'Clique aqui para selecionar' }}</div>
+      <a *ngIf="getFileSize() > 0" (click)="verFicheiro()" class="file-item__show">Ver Ficheiro</a>
+    </div>
+  </div>
+  <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
+</div>
+
+
+
+<!-- input de seleção multípla -->
+<div *ngIf="multiple" class="file-container {{class}}">
+  <div (click)="input.click()" class="file-item__left-side" [class.disabled]="disabled">
+    <div>
+      <svg width="32" height="36" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20.9712 0.111328H3.00565C2.37298 0.128076 1.77249 0.393813 1.33465 0.850796C0.896807 1.30778 0.656991 1.91909 0.667312 2.55188V33.4486C0.656991 34.0814 0.896807 34.6927 1.33465 35.1496C1.77249 35.6066 2.37298 35.8724 3.00565 35.8891H28.9956C29.6283 35.8724 30.2288 35.6066 30.6666 35.1496C31.1045 34.6927 31.3443 34.0814 31.334 33.4486V10.2313L20.9712 0.111328ZM19.834 11.6113V2.46244L29.1618 11.6113H19.834Z"
+          fill="#505151" />
+      </svg>
+    </div>
+    <div class="file-item__data">
+
+      <div *ngIf="!disabled" pTooltip="Anexar" class="file-item__name">{{fileName}}</div>
+      <div *ngIf="disabled" class="file-item__name">{{fileName}}</div>
+
+      <div *ngIf="!selectedFiles" class="file-item__size">Clique aqui para seleccionar os ficheiros</div>
+
+      <ng-container *ngIf="selectedFiles">
+        <div *ngFor="let item of selectedFiles; let i = index" class="file-item__size" style="white-space: nowrap;">
+          <span class="me-2 mr-2">{{i+1}} - {{item.name}}</span>
+          <span>{{getFileSize(item.size)}} MB</span>
+          <a (click)="verFicheiro(i)" class="file-item__show" style="padding: 5px;">Ver Ficheiro</a>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+
+  <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
+
+</div>
+
+<input (change)="uploadEvent($event)" type="file" id="{{inputId}}" #input [disabled]="disabled" [accept]="accept"
+  [multiple]="multiple">
