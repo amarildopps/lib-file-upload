@@ -116,9 +116,19 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
 
   uploadMultiplo(event: any) {
     this.errorMessage = '';
-
     const target = event.target as HTMLInputElement;
-    this.selectedFiles = Array.from(target.files as FileList);
+    const newFiles = Array.from(target.files as FileList)
+    if(this.selectedFiles){
+      this.onAddNewFiles(newFiles);
+      return;
+    }
+    this.selectedFiles = newFiles;
+  }
+
+  private onAddNewFiles(newFiles:File[]){
+    newFiles?.forEach((itemFile:File) =>{
+      this.selectedFiles.push(itemFile);
+    })
   }
 
   verFicheiro(index?: number) {
