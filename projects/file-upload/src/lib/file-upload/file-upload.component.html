@@ -36,7 +36,7 @@
       <div *ngIf="!disabled" pTooltip="Anexar" class="file-item__name">{{fileName}}</div>
       <div *ngIf="disabled" class="file-item__name">{{fileName}}</div>
 
-      <div *ngIf="!selectedFiles" class="file-item__size">Clique aqui para seleccionar os ficheiros</div>
+      <div *ngIf="selectedFiles.length <= 0" class="file-item__size">Clique aqui para seleccionar os ficheiros</div>
 
       <ng-container *ngIf="selectedFiles">
         <div *ngFor="let item of selectedFiles; let i = index" class="file-item__size" style="white-space: nowrap;">
